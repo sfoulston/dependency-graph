@@ -1,9 +1,9 @@
 import FileSystem
 import Foundation
 import PathKit
+import SwiftPackage
 import XcodeProj
 import XcodeProject
-import SwiftPackage
 import XcodeProjectParser
 
 public struct XcodeProjectParserLive: XcodeProjectParser {

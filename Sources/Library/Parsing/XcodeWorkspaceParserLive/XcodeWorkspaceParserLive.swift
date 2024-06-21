@@ -1,11 +1,11 @@
 import FileSystem
 import Foundation
-import PathKit
-import XMLCoder
-import XcodeWorkspace
-import SwiftPackage
-import XcodeWorkspaceParser
 import PackageSwiftFileParser
+import PathKit
+import SwiftPackage
+import XcodeWorkspace
+import XcodeWorkspaceParser
+import XMLCoder
 
 public struct XcodeWorkspaceParserLive: XcodeWorkspaceParser {
     private let fileSystem: FileSystem

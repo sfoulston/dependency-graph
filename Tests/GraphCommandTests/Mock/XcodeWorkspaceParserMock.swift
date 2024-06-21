@@ -1,7 +1,7 @@
 import Foundation
+import SwiftPackage
 import XcodeWorkspace
 import XcodeWorkspaceParser
-import SwiftPackage
 
 struct XcodeWorkspaceParserMock: XcodeWorkspaceParser {
     func parseWorkspace(at fileURL: URL) throws -> XcodeWorkspace {

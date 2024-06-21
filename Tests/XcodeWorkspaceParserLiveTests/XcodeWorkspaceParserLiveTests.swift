@@ -1,7 +1,7 @@
+@testable import PackageSwiftFile
+@testable import PackageSwiftFileParser
 @testable import XcodeWorkspace
 @testable import XcodeWorkspaceParserLive
-@testable import PackageSwiftFileParser
-@testable import PackageSwiftFile
 import XCTest
 
 final class XcodeWorkspaceParserLiveTests: XCTestCase {
