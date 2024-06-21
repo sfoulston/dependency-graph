@@ -29,8 +29,8 @@ struct XCWorkspaceData: Decodable {
         let name: String
         let location: String
         var fileReferences: [FileRef] {
-            _fileReferences.map {
-                let newLocation = $0.location.replacingOccurrences(of: "group:", with: "\(name)/")
+            _fileReferences.map { fileRef in
+                let newLocation = fileRef.location.replacingOccurrences(of: "group:", with: "\(name)/")
                 let newFileRef = FileRef(location: newLocation)
                 return newFileRef
             }

@@ -35,8 +35,8 @@ public struct XcodeWorkspaceParserLive: XcodeWorkspaceParser {
 
 private extension XcodeWorkspaceParserLive {
     func localSwiftPackages(in workspace: XCWorkspaceData, atSourceRoot sourceRoot: URL) throws -> [SwiftPackage] {
-        let fileReferences = workspace.groups.flatMap {
-            $0.fileReferences
+        let fileReferences = workspace.groups.flatMap { group in
+            group.fileReferences
         }
         return try fileReferences.compactMap { fileReference in
             guard let packageSwiftFileURL = fileReference.potentialPackageSwiftFileURL(forSourceRoot: sourceRoot) else {
@@ -54,7 +54,7 @@ private extension XcodeWorkspaceParserLive {
     enum XcodeWorkspaceParsingError: Error {
         case xcodeProjectNotFound
 
-        var localizedDescription: String {
+        var errorDescription: String {
             return "Could not derive location of the Xcode project file from the given workspace."
         }
     }
