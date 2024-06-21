@@ -4,7 +4,7 @@ import GraphCommand
 
 @main
 struct DependencyGraph: ParsableCommand {
-    @Argument(help: "The input to show dependencies for. Can be en .xcodeproj file or a Package.swift file.")
+    @Argument(help: "The input to show dependencies for. Can be en .xcodeproj, .xcworkspace file or a Package.swift file.")
     var input: String
 
     @Option(name: [.short, .long], help: """

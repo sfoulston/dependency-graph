@@ -3,6 +3,7 @@ import Foundation
 import PathKit
 import XcodeProj
 import XcodeProject
+import SwiftPackage
 import XcodeProjectParser
 
 public struct XcodeProjectParserLive: XcodeProjectParser {
@@ -34,7 +35,7 @@ private extension XcodeProjectParserLive {
         }
     }
 
-    func remoteSwiftPackages(in project: XcodeProj) -> [XcodeProject.SwiftPackage] {
+    func remoteSwiftPackages(in project: XcodeProj) -> [SwiftPackage] {
         struct IntermediateRemoteSwiftPackage {
             let name: String
             let repositoryURL: URL
@@ -64,7 +65,7 @@ private extension XcodeProjectParserLive {
         return swiftPackages.map { .remote(name: $0.name, repositoryURL: $0.repositoryURL, products: $0.products) }
     }
 
-    func localSwiftPackages(in project: XcodeProj, atSourceRoot sourceRoot: URL) throws -> [XcodeProject.SwiftPackage] {
+    func localSwiftPackages(in project: XcodeProj, atSourceRoot sourceRoot: URL) throws -> [SwiftPackage] {
         return project.pbxproj.fileReferences.compactMap { fileReference in
             guard fileReference.isPotentialSwiftPackage else {
                 return nil

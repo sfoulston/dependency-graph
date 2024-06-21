@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Workspace
+   version = "1.0">
+   <Group
+      location = "container:"
+      name = "LocalPackages">
+      <FileRef
+         location = "group:ExamplePackageA">
+      </FileRef>
+   </Group>
+   <FileRef
+      location = "container:ExampleWorkspace/ExampleWorkspace.xcodeproj">
+   </FileRef>
+</Workspace>

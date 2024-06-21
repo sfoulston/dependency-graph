@@ -24,6 +24,8 @@ import XcodeProjectGraphBuilder
 import XcodeProjectGraphBuilderLive
 import XcodeProjectParser
 import XcodeProjectParserLive
+import XcodeWorkspaceParser
+import XcodeWorkspaceParserLive
 
 public enum CompositionRoot {
     static func graphCommand(packagesOnly: Bool, nodeSpacing: Float?, rankSpacing: Float?) -> GraphCommand {
@@ -31,6 +33,7 @@ public enum CompositionRoot {
         return GraphCommand(projectRootClassifier: projectRootClassifier,
                             packageSwiftFileParser: packageSwiftFileParser,
                             xcodeProjectParser: xcodeProjectParser,
+                            xcodeWorkspaceParser: xcodeWorkspaceParser,
                             packageGraphBuilder: packageGraphBuilder(packagesOnly: packagesOnly),
                             xcodeProjectGraphBuilder: xcodeProjectGraphBuilder(packagesOnly: packagesOnly),
                             directedGraphWriterFactory: directedGraphWriterFactory)
@@ -81,6 +84,10 @@ private extension CompositionRoot {
 
     private static var xcodeProjectParser: XcodeProjectParser {
         return XcodeProjectParserLive(fileSystem: fileSystem)
+    }
+
+    private static var xcodeWorkspaceParser: XcodeWorkspaceParserLive {
+        return XcodeWorkspaceParserLive(fileSystem: fileSystem, packageSwiftFileParser: packageSwiftFileParser)
     }
 
     private static func xcodeProjectGraphBuilder(packagesOnly: Bool) -> XcodeProjectGraphBuilder {

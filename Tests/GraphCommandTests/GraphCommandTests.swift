@@ -14,6 +14,7 @@ final class GraphCommandTests: XCTestCase {
         let command = GraphCommand(projectRootClassifier: ProjectRootClassifierMock(),
                                    packageSwiftFileParser: PackageSwiftFileParserMock(),
                                    xcodeProjectParser: XcodeProjectParserMock(),
+                                   xcodeWorkspaceParser: XcodeWorkspaceParserMock(),
                                    packageGraphBuilder: PackageGraphBuilderMock(),
                                    xcodeProjectGraphBuilder: XcodeProjectGraphBuilderMock(),
                                    directedGraphWriterFactory: directedGraphWriterFactory)
@@ -36,6 +37,7 @@ final class GraphCommandTests: XCTestCase {
         let command = GraphCommand(projectRootClassifier: ProjectRootClassifierMock(),
                                    packageSwiftFileParser: PackageSwiftFileParserMock(),
                                    xcodeProjectParser: XcodeProjectParserMock(),
+                                   xcodeWorkspaceParser: XcodeWorkspaceParserMock(),
                                    packageGraphBuilder: PackageGraphBuilderMock(),
                                    xcodeProjectGraphBuilder: XcodeProjectGraphBuilderMock(),
                                    directedGraphWriterFactory: directedGraphWriterFactory)
@@ -58,6 +60,7 @@ final class GraphCommandTests: XCTestCase {
         let command = GraphCommand(projectRootClassifier: ProjectRootClassifierMock(),
                                    packageSwiftFileParser: PackageSwiftFileParserMock(),
                                    xcodeProjectParser: XcodeProjectParserMock(),
+                                   xcodeWorkspaceParser: XcodeWorkspaceParserMock(),
                                    packageGraphBuilder: PackageGraphBuilderMock(),
                                    xcodeProjectGraphBuilder: XcodeProjectGraphBuilderMock(),
                                    directedGraphWriterFactory: directedGraphWriterFactory)
