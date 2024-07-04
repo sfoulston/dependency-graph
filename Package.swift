@@ -11,7 +11,8 @@ let package = Package(
     ],
     dependencies: [
         .package(url: "https://github.com/apple/swift-argument-parser", from: "1.2.0"),
-        .package(url: "https://github.com/tuist/XcodeProj.git", .upToNextMajor(from: "8.8.0"))
+        .package(url: "https://github.com/tuist/XcodeProj.git", .upToNextMajor(from: "8.8.0")),
+        .package(url: "https://github.com/CoreOffice/XMLCoder", exact: "0.17.1")
     ],
     targets: [
         .executableTarget(name: "Main", dependencies: [
@@ -41,7 +42,9 @@ let package = Package(
             "XcodeProjectGraphBuilder",
             "XcodeProjectGraphBuilderLive",
             "XcodeProjectParser",
-            "XcodeProjectParserLive"
+            "XcodeProjectParserLive",
+            "XcodeWorkspaceParser",
+            "XcodeWorkspaceParserLive"
         ]),
 
         // Sources/Library/Commands
@@ -52,6 +55,7 @@ let package = Package(
             "PackageSwiftFileParser",
             "ProjectRootClassifier",
             "XcodeProjectParser",
+            "XcodeWorkspaceParser",
             "XcodeProjectGraphBuilder"
         ], path: "Sources/Library/Commands/GraphCommand"),
 
@@ -91,7 +95,8 @@ let package = Package(
         .target(name: "XcodeProjectGraphBuilder", dependencies: [
             "DirectedGraph",
             "PackageGraphBuilder",
-            "XcodeProject"
+            "XcodeProject",
+            "SwiftPackage"
         ], path: "Sources/Library/Graphing/XcodeProjectGraphBuilder"),
         .target(name: "XcodeProjectGraphBuilderLive", dependencies: [
             "DirectedGraph",
@@ -126,12 +131,15 @@ let package = Package(
             "PackageSwiftFileParser",
             "PackageSwiftFileParserCache"
         ], path: "Sources/Library/Parsing/PackageSwiftFileParserLive"),
+        .target(name: "SwiftPackage", path: "Sources/Library/Parsing/SwiftPackage"),
         .target(name: "ProjectRootClassifier", path: "Sources/Library/Parsing/ProjectRootClassifier"),
         .target(name: "ProjectRootClassifierLive", dependencies: [
             "FileSystem",
             "ProjectRootClassifier"
         ], path: "Sources/Library/Parsing/ProjectRootClassifierLive"),
-        .target(name: "XcodeProject", path: "Sources/Library/Parsing/XcodeProject"),
+        .target(name: "XcodeProject", dependencies: [
+            "SwiftPackage"
+        ], path: "Sources/Library/Parsing/XcodeProject"),
         .target(name: "XcodeProjectParser", dependencies: [
             "XcodeProject"
         ], path: "Sources/Library/Parsing/XcodeProjectParser"),
@@ -139,8 +147,23 @@ let package = Package(
             "FileSystem",
             .product(name: "XcodeProj", package: "XcodeProj"),
             "XcodeProject",
-            "XcodeProjectParser"
+            "XcodeProjectParser",
+            "SwiftPackage"
         ], path: "Sources/Library/Parsing/XcodeProjectParserLive"),
+        .target(name: "XcodeWorkspace", dependencies: [
+            "SwiftPackage"
+        ], path: "Sources/Library/Parsing/XcodeWorkspace"),
+        .target(name: "XcodeWorkspaceParser", dependencies: [
+            "XcodeWorkspace"
+        ], path: "Sources/Library/Parsing/XcodeWorkspaceParser"),
+        .target(name: "XcodeWorkspaceParserLive", dependencies: [
+            "FileSystem",
+            .product(name: "XMLCoder", package: "XMLCoder"),
+            "XcodeWorkspace",
+            "XcodeWorkspaceParser",
+            "SwiftPackage",
+            "PackageSwiftFileParser"
+        ], path: "Sources/Library/Parsing/XcodeWorkspaceParserLive"),
 
         // Sources/Library/Outputting
         .target(name: "DirectedGraphWriter", dependencies: [
@@ -228,6 +251,13 @@ let package = Package(
             "FileSystem",
             "XcodeProject",
             "XcodeProjectParserLive"
+        ], resources: [.copy("Example")]),
+        .testTarget(name: "XcodeWorkspaceParserLiveTests", dependencies: [
+            "FileSystem",
+            "PackageSwiftFileParser",
+            "PackageSwiftFile",
+            "XcodeWorkspace",
+            "XcodeWorkspaceParserLive"
         ], resources: [.copy("Example")])
     ]
 )

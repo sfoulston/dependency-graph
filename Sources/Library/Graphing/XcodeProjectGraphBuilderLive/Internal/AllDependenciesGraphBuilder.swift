@@ -4,6 +4,7 @@ import Foundation
 import PackageGraphBuilder
 import PackageSwiftFile
 import PackageSwiftFileParser
+import SwiftPackage
 import XcodeProject
 import XcodeProjectGraphBuilder
 
@@ -37,7 +38,7 @@ public struct AllDependenciesGraphBuilder {
 }
 
 private extension AllDependenciesGraphBuilder {
-    private func process(_ swiftPackage: XcodeProject.SwiftPackage, into graph: DirectedGraph) throws {
+    private func process(_ swiftPackage: SwiftPackage, into graph: DirectedGraph) throws {
         switch swiftPackage {
         case .local(let parameters):
             let packageSwiftFile = try packageSwiftFileParser.parseFile(at: parameters.fileURL)
